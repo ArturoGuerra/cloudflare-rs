@@ -1,15 +1,22 @@
+use crate::endpoints::dns::{BatchDnsRecords as BatchDnsRecordsRet, DeleteId, Record};
 use crate::framework::endpoint::{EndpointSpec, Method};
+use serde::{Deserialize, Serialize};
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize)]
 pub struct BatchDnsRecords<'a> {
     zone_id: &'a str,
     params: BatchDnsRecordsParams,
 }
 
-#[derive(Debug)]
-pub struct BatchDnsRecordsParams {}
+#[derive(Serialize, Deserialize)]
+pub struct BatchDnsRecordsParams {
+    deletes: Option<Vec<DeleteId>>,
+    patches: Option<Vec<Record>>,
+    posts: Option<Vec<Record>>,
+    puts: Option<Vec<Record>>,
+}
 
-impl<'a> EndpointSpec<()> for BatchDnsRecords<'a> {
+impl<'a> EndpointSpec<BatchDnsRecordsRet> for BatchDnsRecords<'a> {
     fn method(&self) -> Method {
         Method::POST
     }

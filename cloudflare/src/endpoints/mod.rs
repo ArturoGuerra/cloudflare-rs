@@ -14,3 +14,6 @@ pub mod user;
 pub mod workers;
 pub mod workerskv;
 pub mod zone;
+
+mod shared_data_structures;
+pub use shared_data_structures::*;
