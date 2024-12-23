@@ -1,4 +1,5 @@
-use crate::endpoints::dns::{BatchDnsRecords as BatchDnsRecordsRet, DeleteId, Record};
+use crate::endpoints::dns::{BatchDnsRecords as BatchDnsRecordsRet, Record};
+use crate::endpoints::Identifier;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
@@ -10,7 +11,7 @@ pub struct BatchDnsRecords<'a> {
 
 #[derive(Serialize, Deserialize)]
 pub struct BatchDnsRecordsParams {
-    deletes: Option<Vec<DeleteId>>,
+    deletes: Option<Vec<Identifier>>,
     patches: Option<Vec<Record>>,
     posts: Option<Vec<Record>>,
     puts: Option<Vec<Record>>,

@@ -1,4 +1,4 @@
-use crate::endpoints::dns::DeleteId;
+use crate::endpoints::Identifier;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
@@ -6,10 +6,10 @@ use serde::{Deserialize, Serialize};
 pub struct DeleteDnsRecord<'a> {
     zone_id: &'a str,
     dns_record_id: &'a str,
-    params: DeleteId,
+    params: Identifier,
 }
 
-impl<'a> EndpointSpec<DeleteId> for DeleteDnsRecord<'a> {
+impl<'a> EndpointSpec<Identifier> for DeleteDnsRecord<'a> {
     fn method(&self) -> Method {
         Method::DELETE
     }

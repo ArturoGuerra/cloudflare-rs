@@ -1,6 +1,7 @@
 use crate::framework::response::ApiResult;
 use serde::{Deserialize, Serialize};
-#[derive(Serialize, Deserialize, Debug)]
+
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct ARecord {
     comment: Option<String>,
     content: Option<String>,
@@ -8,11 +9,9 @@ pub struct ARecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be A
-    kind: RecordKind,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct AAAARecord {
     comment: Option<String>,
     content: Option<String>,
@@ -21,11 +20,9 @@ pub struct AAAARecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be AAAA
-    kind: RecordKind,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct CAARecord {
     comment: Option<String>,
     content: Option<String>,
@@ -35,16 +32,14 @@ pub struct CAARecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be CAA
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct CAARecordData {
     flags: Option<isize>,
     tag: Option<String>,
     value: Option<String>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct CERTRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -54,18 +49,16 @@ pub struct CERTRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be CERT
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct CERTRecordData {
     algorithm: Option<isize>,
     certificate: Option<String>,
     key_tag: Option<isize>,
-    // rename to type with serde
+    #[serde(rename = "type")]
     kind: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct CNAMERecord {
     comment: Option<String>,
     content: Option<String>,
@@ -74,10 +67,8 @@ pub struct CNAMERecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be CNAME
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct DNSKEYRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -87,17 +78,15 @@ pub struct DNSKEYRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be DNSKEY
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct DNSKEYRecordData {
     algorithm: Option<isize>,
     flags: Option<isize>,
     protocol: Option<isize>,
     public_key: Option<String>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct DSRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -107,17 +96,15 @@ pub struct DSRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be DS
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct DSRecordData {
     algorithm: Option<isize>,
     digest: Option<String>,
     digest_type: Option<isize>,
     key_tag: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct HTTPSRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -127,16 +114,14 @@ pub struct HTTPSRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be HTTPS
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct HTTPSRecordData {
     priority: Option<isize>,
     target: Option<String>,
     value: Option<String>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct LOCRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -146,10 +131,8 @@ pub struct LOCRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be LOC
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct LOCRecordData {
     altitude: Option<isize>,
     lat_degress: Option<isize>,
@@ -164,17 +147,17 @@ pub struct LOCRecordData {
     precision_vert: Option<isize>,
     size: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum LatDirection {
     N,
     S,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum LongDirection {
     E,
     W,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct MXRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -184,10 +167,8 @@ pub struct MXRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be MX
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct NAPTRRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -197,10 +178,8 @@ pub struct NAPTRRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be NAPTR
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct NAPTRRecordData {
     flags: Option<String>,
     order: Option<isize>,
@@ -209,7 +188,7 @@ pub struct NAPTRRecordData {
     replacement: Option<String>,
     service: Option<String>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct NSRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -218,10 +197,8 @@ pub struct NSRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be NS
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct PTRRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -230,10 +207,8 @@ pub struct PTRRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be PTR
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SMIMEARecord {
     comment: Option<String>,
     content: Option<String>,
@@ -243,17 +218,15 @@ pub struct SMIMEARecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be SMIMEA
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SMIMEARecordData {
     certificate: Option<String>,
     matching_type: Option<isize>,
     selector: Option<isize>,
     usage: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SRVRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -263,17 +236,15 @@ pub struct SRVRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be SRV
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SRVRecordData {
     port: Option<isize>,
     priority: Option<isize>,
     target: Option<isize>,
     weight: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SSHFPRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -283,16 +254,15 @@ pub struct SSHFPRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be SSHFP
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SSHFPRecordData {
     algorithm: Option<isize>,
     fingerprint: Option<String>,
+    #[serde(rename = "type")]
     kind: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SVCBRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -302,16 +272,14 @@ pub struct SVCBRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be SVCB
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct SVCBRecordData {
     priority: Option<isize>,
     target: Option<String>,
     value: Option<String>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct TLSARecord {
     comment: Option<String>,
     content: Option<String>,
@@ -321,17 +289,15 @@ pub struct TLSARecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be TLSA
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct TLSARecordData {
     certificate: Option<String>,
     matching_type: Option<isize>,
     selector: Option<isize>,
     usage: Option<isize>,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct TXTRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -340,10 +306,8 @@ pub struct TXTRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be TXT
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct URIRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -353,16 +317,14 @@ pub struct URIRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be URI
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct URIRecordData {
     target: Option<String>,
     weight: Option<isize>,
 }
 // Exclusive to Record
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct DNSRecordsOpengpgkeyRecord {
     comment: Option<String>,
     content: Option<String>,
@@ -371,34 +333,34 @@ pub struct DNSRecordsOpengpgkeyRecord {
     settings: Option<RecordSettings>,
     tags: Option<Vec<RecordTags>>,
     ttl: Option<Ttl>,
-    // Should only be OPENPGPKEY
-    kind: RecordKind,
 }
-#[derive(Serialize, Deserialize, Debug)]
+
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[serde(tag = "type")]
 pub enum Record {
-    ARecord(ARecord),
-    AAAARecord(AAAARecord),
-    CAARecord(CAARecord),
-    CERTRecord(CERTRecord),
-    CNAMERecord(CNAMERecord),
-    DNSKEYRecord(DNSKEYRecord),
-    DSRecord(DSRecord),
-    HTTPSRecord(HTTPSRecord),
-    LOCRecord(LOCRecord),
-    MXRecord(MXRecord),
-    NAPTRecord(NAPTRRecord),
-    NSRecord(NSRecord),
-    DNSRecordsOpengpgkeyRecord(DNSRecordsOpengpgkeyRecord), // Exclusive
-    PTRRecord(PTRRecord),
-    SMIMEARecord(SMIMEARecord),
-    SRVRecord(SRVRecord),
-    SSHFPRecord(SSHFPRecord),
-    SVCBRecord(SVCBRecord),
-    TLSARecord(TLSARecord),
-    TXTRecord(TXTRecord),
-    URIRecord(URIRecord),
+    A(ARecord),
+    AAAA(AAAARecord),
+    CAA(CAARecord),
+    CERT(CERTRecord),
+    CNAME(CNAMERecord),
+    DNSKEY(DNSKEYRecord),
+    DS(DSRecord),
+    HTTPS(HTTPSRecord),
+    LOC(LOCRecord),
+    MX(MXRecord),
+    NAPT(NAPTRRecord),
+    NS(NSRecord),
+    DNSRecordsOpengpgkey(DNSRecordsOpengpgkeyRecord), // Exclusive
+    PTR(PTRRecord),
+    SMIMEA(SMIMEARecord),
+    SRV(SRVRecord),
+    SSHFP(SSHFPRecord),
+    SVCB(SVCBRecord),
+    TLSA(TLSARecord),
+    TXT(TXTRecord),
+    URI(URIRecord),
 }
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct RecordSettings {
     ipv4_only: Option<bool>,
     ipv6_only: Option<bool>,
@@ -407,7 +369,7 @@ pub struct RecordSettings {
 type RecordTags = String;
 type Ttl = isize;
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub enum RecordKind {
     A,
     AAAA,
@@ -447,14 +409,8 @@ pub struct ImportDnsRecords {
     total_records_parsed: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-pub struct DeleteId {
-    id: String,
-}
-
 impl ApiResult for String {}
 impl ApiResult for Record {}
-impl ApiResult for DeleteId {}
 impl ApiResult for Vec<Record> {}
 impl ApiResult for BatchDnsRecords {}
 impl ApiResult for ImportDnsRecords {}
