@@ -1,4 +1,4 @@
-use crate::endpoints::dns::Record;
+use crate::endpoints::dns::DnsRecord;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
@@ -6,10 +6,10 @@ use serde::{Deserialize, Serialize};
 pub struct DnsRecordDetails<'a> {
     zone_id: &'a str,
     dns_record_id: &'a str,
-    params: Record,
+    params: DnsRecord,
 }
 
-impl<'a> EndpointSpec<Record> for DnsRecordDetails<'a> {
+impl<'a> EndpointSpec<DnsRecord> for DnsRecordDetails<'a> {
     fn method(&self) -> Method {
         Method::GET
     }

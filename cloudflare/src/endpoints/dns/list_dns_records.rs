@@ -1,9 +1,9 @@
-use crate::endpoints::dns::Record;
+use crate::endpoints::dns::DnsRecord;
 use crate::endpoints::SortDirection;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
-use super::RecordKind;
+use super::DnsRecordKind;
 
 #[derive(Serialize, Deserialize)]
 pub struct ListDnsRecords<'a> {
@@ -40,7 +40,7 @@ pub struct ListDnsReccordsParams {
     tag_match: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "type")]
-    kind: Option<RecordKind>,
+    kind: Option<DnsRecordKind>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -101,7 +101,7 @@ pub struct ListDnsRecordsParamsContent {
     startswith: Option<String>,
 }
 
-impl<'a> EndpointSpec<Vec<Record>> for ListDnsRecords<'a> {
+impl<'a> EndpointSpec<Vec<DnsRecord>> for ListDnsRecords<'a> {
     fn method(&self) -> Method {
         Method::GET
     }

@@ -1,4 +1,4 @@
-use crate::endpoints::dns::Record;
+use crate::endpoints::dns::DnsRecord;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
@@ -11,10 +11,10 @@ pub struct UpdateDnsRecord<'a> {
 
 #[derive(Serialize, Deserialize)]
 pub struct UpdateDnsRecordParams {
-    record: Record,
+    record: DnsRecord,
 }
 
-impl<'a> EndpointSpec<Record> for UpdateDnsRecord<'a> {
+impl<'a> EndpointSpec<DnsRecord> for UpdateDnsRecord<'a> {
     fn method(&self) -> Method {
         Method::PATCH
     }
