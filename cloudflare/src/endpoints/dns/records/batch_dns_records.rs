@@ -1,20 +1,20 @@
-use crate::endpoints::dns::{BatchDnsRecords as BatchDnsRecordsRet, DnsRecord};
+use crate::endpoints::dns::records::{BatchDnsRecords as BatchDnsRecordsRet, DnsRecord};
 use crate::endpoints::Identifier;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub struct BatchDnsRecords<'a> {
-    zone_id: &'a str,
-    params: BatchDnsRecordsParams,
+    pub zone_id: &'a str,
+    pub params: BatchDnsRecordsParams,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct BatchDnsRecordsParams {
-    deletes: Option<Vec<Identifier>>,
-    patches: Option<Vec<DnsRecord>>,
-    posts: Option<Vec<DnsRecord>>,
-    puts: Option<Vec<DnsRecord>>,
+    pub deletes: Option<Vec<Identifier>>,
+    pub patches: Option<Vec<DnsRecord>>,
+    pub posts: Option<Vec<DnsRecord>>,
+    pub puts: Option<Vec<DnsRecord>>,
 }
 
 impl<'a> EndpointSpec<BatchDnsRecordsRet> for BatchDnsRecords<'a> {

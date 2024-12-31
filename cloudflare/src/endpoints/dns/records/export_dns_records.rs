@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub struct ExportDnsRecords<'a> {
-    zone_id: &'a str,
+    pub zone_id: &'a str,
 }
 
 impl<'a> EndpointSpec<String> for ExportDnsRecords<'a> {

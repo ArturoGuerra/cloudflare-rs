@@ -1,4 +1,4 @@
-use crate::endpoints::dns::DnsRecord;
+use crate::endpoints::dns::records::DnsRecord;
 use crate::endpoints::SortDirection;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
@@ -7,50 +7,50 @@ use super::DnsRecordKind;
 
 #[derive(Serialize, Deserialize)]
 pub struct ListDnsRecords<'a> {
-    zone_id: &'a str,
-    params: ListDnsReccordsParams,
+    pub zone_id: &'a str,
+    pub params: ListDnsReccordsParams,
 }
 
 #[derive(Serialize, Deserialize, Default)]
 pub struct ListDnsReccordsParams {
     #[serde(skip_serializing_if = "Option::is_none")]
-    comment: Option<ListDnsRecordsParamsComment>,
+    pub comment: Option<ListDnsRecordsParamsComment>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    content: Option<ListDnsRecordsParamsContent>,
+    pub content: Option<ListDnsRecordsParamsContent>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    direction: Option<SortDirection>,
+    pub direction: Option<SortDirection>,
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "match")]
-    r#match: Option<ListDnsRecordsParamsMatch>,
+    pub match_: Option<ListDnsRecordsParamsMatch>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    name: Option<ListDnsRecordsParamsName>,
+    pub name: Option<ListDnsRecordsParamsName>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    order: Option<ListDnsRecordsParamsOrder>,
+    pub order: Option<ListDnsRecordsParamsOrder>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    page: Option<isize>,
+    pub page: Option<isize>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    per_page: Option<isize>,
+    pub per_page: Option<isize>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    proxied: Option<bool>,
+    pub proxied: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    search: Option<String>,
+    pub search: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    tag: Option<String>,
+    pub tag: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
-    tag_match: Option<String>,
+    pub tag_match: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     #[serde(rename = "type")]
-    kind: Option<DnsRecordKind>,
+    pub kind: Option<DnsRecordKind>,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct ListDnsRecordsParamsTag {
-    absent: Option<String>,
-    contains: Option<String>,
-    endswith: Option<String>,
-    exact: Option<String>,
-    present: Option<String>,
-    startswith: Option<String>,
+    pub absent: Option<String>,
+    pub contains: Option<String>,
+    pub endswith: Option<String>,
+    pub exact: Option<String>,
+    pub present: Option<String>,
+    pub startswith: Option<String>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -61,10 +61,10 @@ pub enum ListDnsRecordsParamsTagMatch {
 
 #[derive(Serialize, Deserialize)]
 pub struct ListDnsRecordsParamsName {
-    contains: Option<String>,
-    endswith: Option<String>,
-    exact: Option<String>,
-    startswith: Option<String>,
+    pub contains: Option<String>,
+    pub endswith: Option<String>,
+    pub exact: Option<String>,
+    pub startswith: Option<String>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -85,20 +85,20 @@ pub enum ListDnsRecordsParamsMatch {
 
 #[derive(Serialize, Deserialize)]
 pub struct ListDnsRecordsParamsComment {
-    absent: Option<String>,
-    contains: Option<String>,
-    endswitch: Option<String>,
-    exact: Option<String>,
-    present: Option<String>,
-    startswith: Option<String>,
+    pub absent: Option<String>,
+    pub contains: Option<String>,
+    pub endswitch: Option<String>,
+    pub exact: Option<String>,
+    pub present: Option<String>,
+    pub startswith: Option<String>,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct ListDnsRecordsParamsContent {
-    contains: Option<String>,
-    endswith: Option<String>,
-    exact: Option<String>,
-    startswith: Option<String>,
+    pub contains: Option<String>,
+    pub endswith: Option<String>,
+    pub exact: Option<String>,
+    pub startswith: Option<String>,
 }
 
 impl<'a> EndpointSpec<Vec<DnsRecord>> for ListDnsRecords<'a> {
