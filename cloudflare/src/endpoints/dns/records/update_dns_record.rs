@@ -1,22 +1,22 @@
-use crate::endpoints::dns::DnsRecord;
+use crate::endpoints::dns::records::DnsRecord;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct OverwriteDnsRecord<'a> {
-    zone_id: &'a str,
-    dns_record_id: &'a str,
-    params: OverwriteDnsRecordParams,
+pub struct UpdateDnsRecord<'a> {
+    pub zone_id: &'a str,
+    pub dns_record_id: &'a str,
+    pub params: UpdateDnsRecordParams,
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct OverwriteDnsRecordParams {
-    record: DnsRecord,
+pub struct UpdateDnsRecordParams {
+    pub record: DnsRecord,
 }
 
-impl<'a> EndpointSpec<DnsRecord> for OverwriteDnsRecord<'a> {
+impl<'a> EndpointSpec<DnsRecord> for UpdateDnsRecord<'a> {
     fn method(&self) -> Method {
-        Method::PUT
+        Method::PATCH
     }
 
     fn path(&self) -> String {

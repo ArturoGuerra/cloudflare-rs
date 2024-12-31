@@ -3,68 +3,100 @@ use std::net::{Ipv4Addr, Ipv6Addr};
 use crate::framework::response::ApiResult;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct ARecord {
-    comment: Option<String>,
-    content: Ipv4Addr,
-    name: String,
-    proxied: Option<bool>,
-    settings: Option<DnsRecordSettings>,
-    tags: Option<Vec<DnsRecordTags>>,
-    ttl: Ttl,
-    zone_id: Option<String>,
-    zone_name: Option<String>,
-    id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub content: Option<Ipv4Addr>,
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Vec<DnsRecordTags>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ttl: Option<usize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct AAAARecord {
-    comment: Option<String>,
-    content: Ipv6Addr,
-    name: String,
-    proxied: Option<bool>,
-    settings: Option<DnsRecordSettings>,
-    tags: Option<Vec<DnsRecordTags>>,
-    ttl: Ttl,
-    zone_id: Option<String>,
-    zone_name: Option<String>,
-    id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub comment: Option<String>,
+    pub content: Option<Ipv6Addr>,
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Vec<DnsRecordTags>>,
+    pub ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct CAARecord {
-    comment: Option<String>,
-    content: Option<String>,
-    data: CAARecordData,
-    name: String,
-    proxied: Option<bool>,
-    settings: Option<DnsRecordSettings>,
-    tags: Option<Vec<DnsRecordTags>>,
-    ttl: Ttl,
-    zone_id: Option<String>,
-    zone_name: Option<String>,
-    id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub content: Option<String>,
+    pub data: CAARecordData,
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Vec<DnsRecordTags>>,
+    pub ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct CAARecordData {
-    flags: isize,
-    tag: String,
-    value: String,
+    pub flags: isize,
+    pub tag: String,
+    pub value: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct CERTRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: CERTRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -79,30 +111,45 @@ pub struct CERTRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct CNAMERecord {
-    comment: Option<String>,
-    content: String,
-    name: String,
-    proxied: Option<bool>,
-    settings: Option<DnsRecordSettings>,
-    tags: Option<Vec<DnsRecordTags>>,
-    ttl: Ttl,
-    zone_id: Option<String>,
-    zone_name: Option<String>,
-    id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub comment: Option<String>,
+    pub content: String,
+    pub name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub tags: Option<Vec<DnsRecordTags>>,
+    pub ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct DNSKEYRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: DNSKEYRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -116,16 +163,24 @@ pub struct DNSKEYRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct DSRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: DSRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -139,16 +194,24 @@ pub struct DSRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct HTTPSRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: HTTPSRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -161,16 +224,24 @@ pub struct HTTPSRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct LOCRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: LOCRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -204,84 +275,128 @@ pub enum LongDirection {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
 pub struct MXRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
     content: String,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     priority: Option<isize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct NAPTRRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: NAPTRRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct NAPTRRecordData {
+    #[serde(skip_serializing_if = "Option::is_none")]
     flags: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     order: Option<isize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     preference: Option<isize>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     regex: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     replacement: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     service: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct NSRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
     content: String,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct PTRRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
     content: String,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct SMIMEARecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: SMIMEARecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -295,16 +410,24 @@ pub struct SMIMEARecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct SRVRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: SRVRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -318,16 +441,24 @@ pub struct SRVRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct SSHFPRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: SSHFPRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -341,16 +472,24 @@ pub struct SSHFPRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct SVCBRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: SVCBRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -363,16 +502,24 @@ pub struct SVCBRecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct TLSARecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: TLSARecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -386,30 +533,45 @@ pub struct TLSARecordData {
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct TXTRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
     content: String,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct URIRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     content: Option<String>,
     data: URIRecordData,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -421,15 +583,22 @@ pub struct URIRecordData {
 // Exclusive to Record
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct DNSRecordsOpengpgkeyRecord {
+    #[serde(skip_serializing_if = "Option::is_none")]
     comment: Option<String>,
     content: String,
     name: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
     proxied: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     settings: Option<DnsRecordSettings>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     tags: Option<Vec<DnsRecordTags>>,
     ttl: Ttl,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_id: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     zone_name: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     id: Option<String>,
 }
 
@@ -446,7 +615,7 @@ pub enum DnsRecord {
     HTTPS(HTTPSRecord),
     LOC(LOCRecord),
     MX(MXRecord),
-    NAPT(NAPTRRecord),
+    NAPTR(NAPTRRecord),
     NS(NSRecord),
     DNSRecordsOpengpgkey(DNSRecordsOpengpgkeyRecord), // Exclusive
     PTR(PTRRecord),
@@ -461,16 +630,19 @@ pub enum DnsRecord {
 #[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub struct DnsRecordSettings {
     #[serde(skip_serializing_if = "Option::is_none")]
-    flatten_cname: Option<bool>,
-    ipv4_only: Option<bool>,
-    ipv6_only: Option<bool>,
+    pub flatten_cname: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ipv4_only: Option<bool>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub ipv6_only: Option<bool>,
 }
 
 type DnsRecordTags = String;
 type Ttl = usize;
 
-#[derive(Serialize, Deserialize, Debug, PartialEq, Eq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq, Eq, Default)]
 pub enum DnsRecordKind {
+    #[default]
     A,
     AAAA,
     CAA,

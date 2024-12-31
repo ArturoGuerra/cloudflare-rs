@@ -1,24 +1,20 @@
-use crate::endpoints::dns::DnsRecord;
+use crate::endpoints::dns::records::DnsRecord;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-pub struct DnsRecordDetails<'a> {
-    zone_id: &'a str,
-    dns_record_id: &'a str,
-    params: DnsRecord,
+pub struct CreateDnsRecord<'a> {
+    pub zone_id: &'a str,
+    pub params: DnsRecord,
 }
 
-impl<'a> EndpointSpec<DnsRecord> for DnsRecordDetails<'a> {
+impl<'a> EndpointSpec<DnsRecord> for CreateDnsRecord<'a> {
     fn method(&self) -> Method {
-        Method::GET
+        Method::POST
     }
 
     fn path(&self) -> String {
-        format!(
-            "zones/{}/dns_records/{}",
-            &self.zone_id, &self.dns_record_id
-        )
+        format!("zones/{}/dns_records", &self.zone_id)
     }
 
     #[inline]

@@ -1,4 +1,4 @@
-use crate::endpoints::dns::ImportDnsRecords as ImportDnsRecordsRet;
+use crate::endpoints::dns::records::ImportDnsRecords as ImportDnsRecordsRet;
 use crate::framework::endpoint::{EndpointSpec, Method};
 use serde::{Deserialize, Serialize};
 

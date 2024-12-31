@@ -71,6 +71,7 @@ impl Client {
             .request(endpoint.method(), endpoint.url(&self.environment));
 
         if let Some(body) = endpoint.body() {
+            println!("Body: {:?}", &body);
             request = request.body(body);
             request = request.header(
                 reqwest::header::CONTENT_TYPE,
